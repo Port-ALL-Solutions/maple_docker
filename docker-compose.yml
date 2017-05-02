@@ -1,0 +1,64 @@
+version: '2'
+services:
+  odoo:
+    image: xtremxpert/docker-odoo:10.0
+    environment:
+      PGHOST: db
+      PGPASSWORD: M4pl3P4ss
+      PGUSER: odoo
+    stdin_open: true
+    tty: true
+    logging:
+      driver: json-file
+      options:
+        max-file: '5'
+        max-size: 10m
+    links:
+    - db:db
+    volumes_from:
+    - odoo-data
+    ports:
+    - 8069:8069/tcp
+  db-data:
+    image: postgres
+    stdin_open: true
+    volumes:
+    - /srv/maple/pgdata:/var/lib/postgresql/data/pgdata
+    tty: true
+    logging:
+      driver: json-file
+      options:
+        max-file: '5'
+        max-size: 10m
+    command:
+    - /bin/true
+  odoo-data:
+    image: xtremxpert/docker-odoo:10.0
+    stdin_open: true
+    volumes:
+    - /srv/maple/addons:/mnt/extra-addons
+    tty: true
+    logging:
+      driver: json-file
+      options:
+        max-file: '5'
+        max-size: 10m
+    links:
+    - db:db
+    command:
+    - /bin/true
+  db:
+    image: postgres
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_PASSWORD: M4pl3P4ss
+      POSTGRES_USER: odoo
+    stdin_open: true
+    tty: true
+    logging:
+      driver: json-file
+      options:
+        max-file: '5'
+        max-size: 10m
+    volumes_from:
+    - db-data
