@@ -1,7 +1,8 @@
 version: '2'
 services:
   odoo:
-    image: xtremxpert/docker-odoo:10.0
+#    image: xtremxpert/docker-odoo:10.0
+    image: test-maple
     environment:
       PGHOST: db
       PGPASSWORD: M4pl3P4ss
@@ -33,7 +34,8 @@ services:
     command:
     - /bin/true
   odoo-data:
-    image: xtremxpert/docker-odoo:10.0
+    image: test-maple
+#    image: xtremxpert/docker-odoo:10.0
     stdin_open: true
     volumes:
     - /srv/maple/addons:/mnt/extra-addons
