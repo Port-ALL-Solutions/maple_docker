@@ -5,7 +5,7 @@ services:
     image: test-maple
     environment:
       PGHOST: db
-      PGPASSWORD: M4pl3P4ss
+      PGPASSWORD: odoo
       PGUSER: odoo
     stdin_open: true
     tty: true
@@ -53,7 +53,7 @@ services:
     image: postgres
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
-      POSTGRES_PASSWORD: M4pl3P4ss
+      POSTGRES_PASSWORD: odoo
       POSTGRES_USER: odoo
     stdin_open: true
     tty: true
